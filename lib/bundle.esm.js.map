@@ -1,1 +1,1 @@
-{"version":3,"file":"bundle.esm.js","sources":["../src/index.ts"],"sourcesContent":["function textHighlight() {\n  console.log('Hello World!')\n}\n\nexport default textHighlight\n"],"names":["textHighlight","console","log"],"mappings":"AAAA,SAASA,IACPC,QAAQC,IAAI,eACd"}
+{"version":3,"file":"bundle.esm.js","sources":["../src/index.ts"],"sourcesContent":["/**\n * 核心方法\n */\nfunction textHighlight() {\n  console.log('Hello World!')\n}\n\nexport default textHighlight\n"],"names":["textHighlight","console","log"],"mappings":"AAGA,SAASA,IACPC,QAAQC,IAAI,eACd"}
