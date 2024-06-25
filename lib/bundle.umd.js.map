@@ -1,0 +1,1 @@
+{"version":3,"file":"bundle.umd.js","sources":["../src/index.ts"],"sourcesContent":["function textHighlight() {\n  console.log('Hello World!')\n}\n\nexport default textHighlight\n"],"names":["console","log"],"mappings":"iPAAA,WACEA,QAAQC,IAAI,eACd"}
