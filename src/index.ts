@@ -1,5 +1,6 @@
 import type { DeafultConfig } from './types'
 import { matchKeywordsWithPositions } from './core'
+import sectionRange from './core/sectionRange'
 
 /**
  * 核心方法
@@ -7,8 +8,10 @@ import { matchKeywordsWithPositions } from './core'
  */
 function textHighlight(config: DeafultConfig) {
   const { text, keywords } = config
-  const match = matchKeywordsWithPositions(text, keywords)
-  console.log(match)
+  return matchKeywordsWithPositions(text, keywords)
 }
 
-export default textHighlight
+export {
+  textHighlight,
+  sectionRange,
+}

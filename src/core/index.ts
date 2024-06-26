@@ -20,7 +20,6 @@ export function matchKeywordsWithPositions(str: string, keywords: string | strin
   // 使用 exec 遍历所有匹配项
   // eslint-disable-next-line no-cond-assign
   while ((match = (regex as RegExp).exec(str)) !== null) {
-    console.log(match, '------match')
     matches.push({
       keyword: match[0],
       start: match.index,
