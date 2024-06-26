@@ -14,7 +14,6 @@ export function createRegexFromKeywords(keywords: string | string[]): RegExp | u
 
 export function matchKeywordsWithPositions(str: string, keywords: string | string[]) {
   const regex = createRegexFromKeywords(keywords)
-  console.log(regex)
   const matches = []
   let match: RegExpExecArray | null
 
