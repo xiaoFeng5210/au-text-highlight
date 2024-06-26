@@ -1,7 +1,7 @@
 import sectionRange from './core/sectionRange'
-import { textHighlight } from './core'
+import { auExtractHighlightText } from './core'
 
 export {
-  textHighlight,
+  auExtractHighlightText,
   sectionRange,
 }

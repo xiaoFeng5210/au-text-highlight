@@ -40,7 +40,7 @@ export function matchKeywordsWithPositions(str: string, keywords: string | strin
  * 核心方法
  * @param config
  */
-export function textHighlight(config: DeafultConfig) {
+export function auExtractHighlightText(config: DeafultConfig) {
   const { text, keywords } = config
   return matchKeywordsWithPositions(text, keywords)
 }
