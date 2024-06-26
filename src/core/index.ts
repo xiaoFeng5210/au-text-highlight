@@ -1,3 +1,5 @@
+import type { DeafultConfig } from '../types'
+
 /**
  * 构建正则
  * @param keywords
@@ -28,4 +30,13 @@ export function matchKeywordsWithPositions(str: string, keywords: string | strin
   }
 
   return matches
+}
+
+/**
+ * 核心方法
+ * @param config
+ */
+export function textHighlight(config: DeafultConfig) {
+  const { text, keywords } = config
+  return matchKeywordsWithPositions(text, keywords)
 }
