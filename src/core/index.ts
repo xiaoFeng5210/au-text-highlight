@@ -5,12 +5,16 @@ import type { DeafultConfig } from '../types'
  * @param keywords
  */
 export function createRegexFromKeywords(keywords: string | string[]): RegExp | undefined {
+  const escapeRegExp = (str: string) => {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& 表示整个匹配的字符串
+  }
   if (typeof keywords === 'string') {
-    return new RegExp(`\\b${keywords}\\b`, 'gi')
+    return new RegExp(`${escapeRegExp(keywords)}`, 'gi')
   }
   if (Array.isArray(keywords)) {
+    const escapedKeywords = keywords.map(escapeRegExp)
     // 将所有关键字用 | 分隔，并加入 \b 以确保匹配整个单词，关键字先进行转义
-    return new RegExp(`\\b(${keywords.join('|')})\\b`, 'gi')
+    return new RegExp(`(${escapedKeywords.join('|')})`, 'gi')
   }
 }
 
