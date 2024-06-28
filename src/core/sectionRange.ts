@@ -27,10 +27,10 @@ function getNodeAndOffset(dom: Node, start = 0, end = 0): OffsetAndSetRange | nu
   const arrTextList: ChildNode[] = []
 
   // 把只要是文本节点的，都放到arrTextList中
-  const map = function (chlids: NodeListOf<ChildNode>) {
+  const map = function (child: NodeListOf<ChildNode>) {
     // eslint-disable-next-line ts/ban-ts-comment
     // @ts-expect-error
-    [...chlids].forEach((el) => {
+    [...child].forEach((el) => {
       if (el.nodeName === '#text') {
         arrTextList.push(el)
       }
