@@ -5,3 +5,9 @@ export interface DeafultConfig {
 }
 
 export type OffsetAndSetRange = [ChildNode, number, ChildNode, number]
+export interface GetSectionRangeConfig {
+  theme: {
+    textColor: string
+    bgColor: string
+  }
+}
