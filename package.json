@@ -1,6 +1,6 @@
 {
   "name": "au-text-highlight",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "main": "lib/bundle.cjs.js",
   "module": "lib/bundle.esm.js",
@@ -10,7 +10,7 @@
     "README.md",
     "LICENSE"
   ],
-  "description": "文本关键字匹配模块, 主要用于以后的文字高亮和关键字检索",
+  "description": "提供文本关键字匹配，文本划词获得选区范围, 以及自动高亮相关文本等功能",
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/xiaoFeng5210/au-text-highlight",
   "keywords": [
-    "正则", "关键字", "高亮", "文本匹配", "文本高亮", "关键字匹配", "关键字高亮"
+    "正则", "关键字", "高亮", "文本匹配", "文本高亮", "关键字匹配", "关键字高亮", "划词"
   ],
   "author": "",
   "license": "ISC",
