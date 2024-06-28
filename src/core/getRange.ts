@@ -19,11 +19,13 @@ export function getSelectionRange(container: Node) {
       }
       // 节点匹配了
       // 不再遍历
+      // eslint-disable-next-line eqeqeq
       if (node == startNode) {
         startIndex += startOffset
         return true
       }
 
+      // eslint-disable-next-line eqeqeq
       if (startNode.parentNode == node) {
         loopIndex(node)
         return true
