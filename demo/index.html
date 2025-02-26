@@ -1,54 +1,16 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>demo</title>
-    <style>
-        .g_box {
-            width: 300px;
-            height: 300px;
-            padding: 10px;
-        }
-        .box_item {
-            width: fit-content;
-            background-color: cadetblue;
-            color: aliceblue;
-            
-            /*white-space: pre-wrap;*/
-            /*width: max-content;*/
-        /*    文字换行*/
-        }
-        .box_item_child {
-            visibility: hidden;
-        }
-    </style>
-</head>
-<body>
-<div class="g_box">
-    <div class="box_item" id="test_item" contenteditable="true">与其前身 <span>GPT-2</span> 一样，它是一种仅解码器的深度神经网络 [2] 转换器模型，它通过一种称为“注意力”的技术取代了递归和基于卷积的架构。 [3] 这种注意力机制允许模型有选择地关注它预测最相关的输入文本片段。 [4] GPT-3 有 1750 亿个参数，每个参数精度为 16 位，需要 350GB 的存储空间，因为每个参数占用 2 个字节。它的上下文窗口大小为 2048 个令牌，并且在许多任务中表现出强大的“零样本”和“少样本”学习能力。</div>
-    <button id="button">高亮</button>
-    <button id="ranges">获取选区范围</button>
-</div>
-</body>
-<script type="module">
-    import {auExtractText, sectionRangeHighlight, getSelectionRange} from '../lib/bundle.esm.js'
-    
-    const text = document.getElementById('test_item').innerText
-    const results = auExtractText({text, keywords: '参数'})
-    console.log(results)
-    const $button = document.getElementById('button')
-    const $box = document.getElementById('test_item')
-    const $ranges = document.getElementById('ranges')
-    $button.addEventListener('click', () => {
-        sectionRangeHighlight($box, results.map(v => ({start: v.start, end: v.end})))
-    })
+<html lang="en">
 
-    $ranges.addEventListener('click', () => {
-        const res = getSelectionRange($box);
-        console.log(res, '__res__')
-    })
-</script>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>text-highlight</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>
