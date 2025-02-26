@@ -8,12 +8,15 @@ const TextHighlighter = () => {
 
   const handleHighlight = () => {
     if (textRef.current) {
-      const text = textRef.current.innerText;
-      const results = auExtractText({ text, keywords: keyword });
-      sectionRangeHighlight(
-        textRef.current,
-        results.map((v: ExtractResult): HighlightRange => ({ start: v.start, end: v.end }))
-      );
+      // const text = textRef.current.innerText;
+      // const results = auExtractText({ text, keywords: keyword });
+      // sectionRangeHighlight(
+      //   textRef.current,
+      //   results.map((v: ExtractResult): HighlightRange => ({ start: v.start, end: v.end }))
+      // );
+      sectionRangeHighlight(textRef.current, [{ start: 5, end: 8 }])
+      const selection = document?.getSelection()
+      console.log(selection)
     }
   };
 
@@ -50,19 +53,23 @@ const TextHighlighter = () => {
         contentEditable
         suppressContentEditableWarning
       >
-        与其前身 <span>GPT-2</span> 一样，它是一种仅解码器的深度神经网络 [2] 转换器模型，它通过一种称为"注意力"的技术取代了递归和基于卷积的架构。 [3] 这种注意力机制允许模型有选择地关注它预测最相关的输入文本片段。 [4] GPT-3 有 1750 亿个参数，每个参数精度为 16 位，需要 350GB 的存储空间，因为每个参数占用 2 个字节。它的上下文窗口大小为 2048 个令牌，并且在许多任务中表现出强大的"零样本"和"少样本"学习能力。
+        与其前身<span>GPT-2</span> 一样，
+        <span>它是一种仅解码器的深度神经网络</span>
+        <span>[2] 转换器模型，它通过一种称为"注意力"的技术取代了递归和基于卷积的架构。
+          [3] 这种注意力机制允许模型有选择地关注它预测最相关的输入文本片段。
+          [4] GPT-3 有 1750 亿个参数，每个<b>参数</b>精度为 16 位，需要 350GB 的存储空间，因为每个参数占用 2 个字节。它的上下文窗口大小为 2048 个令牌，并且在许多任务中表现出强大的"零样本"和"少样本"学习能力。</span>
       </div>
 
       <div className="flex gap-3 mb-4">
         <button
           onClick={handleHighlight}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          className="px-4 py-2 bg-blue-600 text-black rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           高亮关键词
         </button>
         <button
           onClick={handleGetRange}
-          className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+          className="px-4 py-2 bg-gray-600 text-black rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
         >
           获取选区范围
         </button>

@@ -1,15 +1,18 @@
 {
   "compilerOptions": {
+    "composite": true,
     "target": "ES5",
     "module": "ESNext",
+    "moduleResolution": "node",
+    "strict": true,
     "declaration": true,
     "declarationDir": "lib",
     "outDir": "lib",
-    "strict": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution":"node"
+    "skipLibCheck": true
   },
-  "include": ["src"]
+  "include": [
+    "src"
+  ]
 }
