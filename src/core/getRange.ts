@@ -3,6 +3,31 @@ import type { GetSectionRangeConfig } from '../types'
 let startIndex = 0
 
 /**
+ * 获取选区内容
+ * @returns {content: string, section: Selection}
+ */
+export function getSelectionRangeContent(): {
+  content: string
+  section: Selection
+} {
+  if (document) {
+    const section = document?.getSelection()
+    if (section) {
+      return {
+        content: section.toString(),
+        section,
+      }
+    }
+    else {
+      throw new Error('section is undefined')
+    }
+  }
+  else {
+    throw new Error('document is undefined')
+  }
+}
+
+/**
  * 获得当前选区范围
  * @returns [startIndex, endIndex]
  */

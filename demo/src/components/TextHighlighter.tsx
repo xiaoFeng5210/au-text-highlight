@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { auExtractText, sectionRangeHighlight, getSelectionRange, ExtractResult, HighlightRange } from '../../../lib/bundle.esm.js';
+import { auExtractText, sectionRangeHighlight, getSelectionRange, getSelectionRangeContent } from '../../../lib/bundle.esm.js';
 
 const TextHighlighter = () => {
   const textRef = useRef<HTMLDivElement>(null);
@@ -15,8 +15,8 @@ const TextHighlighter = () => {
       //   results.map((v: ExtractResult): HighlightRange => ({ start: v.start, end: v.end }))
       // );
       sectionRangeHighlight(textRef.current, [{ start: 5, end: 8 }])
-      const selection = document?.getSelection()
-      console.log(selection)
+      const { content, section } = getSelectionRangeContent()
+      console.log(content, section)
     }
   };
 
