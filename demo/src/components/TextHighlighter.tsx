@@ -6,6 +6,11 @@ const TextHighlighter = () => {
   const [selectedRange, setSelectedRange] = useState<[number, number] | null>(null);
   const [keyword, setKeyword] = useState<string>('参数');
 
+  useEffect(() => {
+    const dom = document.getElementById('text-highlighter')
+    console.log('%c [ dom ]-11', 'font-size:13px; background:pink; color:#bf2c9f;', dom?.childNodes)
+  }, [])
+
   const handleHighlight = () => {
     if (textRef.current) {
       // const text = textRef.current.innerText;
@@ -28,7 +33,7 @@ const TextHighlighter = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div id="text-highlighter" className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-gray-800">文本高亮演示</h2>
 
       <div className="mb-4">

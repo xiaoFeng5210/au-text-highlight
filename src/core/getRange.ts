@@ -19,7 +19,7 @@ export function getSelectionRangeContent(): {
       }
     }
     else {
-      throw new Error('section is undefined')
+      throw new Error('selection is undefined')
     }
   }
   else {
@@ -42,6 +42,7 @@ export function getSelectionRange(container: Node, config?: GetSectionRangeConfi
   const selection = document.getSelection() as Selection
   const range = selection.getRangeAt(0)
   const startNode = range.startContainer
+  console.log('%c [ startNode ]-45', 'font-size:13px; background:pink; color:#bf2c9f;', startNode)
   const startOffset = range.startOffset
   loopIndex(container, startNode, startOffset)
   const endIndex = startIndex + selection.toString().trim().length
@@ -58,8 +59,11 @@ export function getSelectionRange(container: Node, config?: GetSectionRangeConfi
 function loopIndex(dom: Node, startNode: Node, startOffset: number) {
   // eslint-disable-next-line ts/ban-ts-comment
   // @ts-expect-error
+
+  const nodes = [...dom.childNodes] as Node[]
+  console.log('%c [ nodes ]-63', 'font-size:13px; background:pink; color:#bf2c9f;', nodes)
   // eslint-disable-next-line array-callback-return
-  [...dom.childNodes].some((node) => {
+  nodes.some((node) => {
     if (!node.textContent) {
       // eslint-disable-next-line array-callback-return
       return

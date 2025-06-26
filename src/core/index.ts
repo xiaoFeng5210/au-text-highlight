@@ -18,6 +18,11 @@ export function createRegexFromKeywords(keywords: string | string[]): RegExp | u
   }
 }
 
+/**
+ * 匹配关键词并返回位置
+ * @param str
+ * @param keywords
+ */
 export function matchKeywordsWithPositions(str: string, keywords: string | string[]) {
   const regex = createRegexFromKeywords(keywords)
   const matches = []
