@@ -6,15 +6,8 @@ interface TriggerPosition {
   text: string
   x: number
   y: number
-}
-
-export default class DrawWordConstituencyPopover {
-  constructor() {
-    this.init()
-  }
-
-  init() {
-  }
+  width: number
+  height: number
 }
 
 class Popover {
@@ -24,6 +17,7 @@ class Popover {
   constructor(domId: string, rangeTextNode: Node) {
     this.triggerNode = rangeTextNode
     this.init(domId)
+    this.initEvent()
   }
 
   init(domId: string) {
@@ -33,6 +27,7 @@ class Popover {
     }
     this.popoverEle = $ele
     this.popoverEle.style.visibility = 'hidden'
+    this.popoverEle.style.position = 'fixed'
     document.body.appendChild(this.popoverEle)
   }
 
@@ -40,13 +35,31 @@ class Popover {
     document.addEventListener('mouseup', (evt) => {
       const triggerPosition = this.getTriggerPosition()
       if (triggerPosition) {
-
+        this.show(triggerPosition)
+      }
+      else {
+        this.hide()
       }
     })
   }
 
   show(position: TriggerPosition) {
-    const { x = 0, y = 0 } = position
+    const { x = 0, y = 0, width = 0 } = position
+    if (!this.popoverEle)
+      return
+    // 计算触发元素的中心点
+    const centerX = x + width / 2
+    const actualLeft = centerX - this.popoverEle.offsetWidth / 2
+    const actualTop = y - 5
+    this.popoverEle.style.left = `${actualLeft}px`
+    this.popoverEle.style.top = `${actualTop}px`
+    this.popoverEle.style.visibility = 'visible'
+  }
+
+  hide() {
+    if (!this.popoverEle)
+      return
+    this.popoverEle.style.visibility = 'hidden'
   }
 
   getTriggerPosition() {
@@ -75,5 +88,14 @@ class Popover {
     else {
       console.error('no selection')
     }
+  }
+}
+
+export default class DrawWordConstituencyPopover extends Popover {
+  constructor(popoverId: string, rangeTextNode: Node) {
+    super(popoverId, rangeTextNode)
+  }
+
+  init() {
   }
 }
