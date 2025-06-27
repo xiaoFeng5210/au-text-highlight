@@ -8,7 +8,6 @@ const TextHighlighter = () => {
 
   useEffect(() => {
     const dom = document.getElementById('text-highlighter')
-    console.log('%c [ dom ]-11', 'font-size:13px; background:pink; color:#bf2c9f;', dom?.childNodes)
   }, [])
 
   const handleHighlight = () => {

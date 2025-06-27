@@ -31,37 +31,33 @@ export function getSelectionRangeContent(): {
  * 获得当前选区范围
  * @returns [startIndex, endIndex]
  */
+// eslint-disable-next-line unused-imports/no-unused-vars
 export function getSelectionRange(container: Node, config?: GetSectionRangeConfig) {
-  if (config && 'theme' in config) {
-    // TODO:
-    const { textColor, bgColor } = config.theme ?? { textColor: '#000', bgColor: '#ff0' }
-  }
+  // if (config && 'theme' in config) {
+  // }
   startIndex = 0
   // 给元素设置直接设置样式
 
   const selection = document.getSelection() as Selection
   const range = selection.getRangeAt(0)
   const startNode = range.startContainer
-  console.log('%c [ startNode ]-45', 'font-size:13px; background:pink; color:#bf2c9f;', startNode)
-  const startOffset = range.startOffset
+  const startOffset = range.startOffset // 开始位置的偏移量
   loopIndex(container, startNode, startOffset)
   const endIndex = startIndex + selection.toString().trim().length
-
   return [startIndex, endIndex]
 }
 
 /**
- * 开始位置的计算
+ * 开始位置, 结束位置的计算
  * @param dom
  * @param startNode
  * @param startOffset
  */
-function loopIndex(dom: Node, startNode: Node, startOffset: number) {
+function loopIndex(dom: Node, rangeAtFirstTextNode: Node, startOffset: number) {
   // eslint-disable-next-line ts/ban-ts-comment
   // @ts-expect-error
 
   const nodes = [...dom.childNodes] as Node[]
-  console.log('%c [ nodes ]-63', 'font-size:13px; background:pink; color:#bf2c9f;', nodes)
   // eslint-disable-next-line array-callback-return
   nodes.some((node) => {
     if (!node.textContent) {
@@ -71,14 +67,14 @@ function loopIndex(dom: Node, startNode: Node, startOffset: number) {
     // 节点匹配了
     // 不再遍历
     // eslint-disable-next-line eqeqeq
-    if (node == startNode) {
+    if (node == rangeAtFirstTextNode) {
       startIndex += startOffset
       return true
     }
 
     // eslint-disable-next-line eqeqeq
-    if (startNode.parentNode == node) {
-      loopIndex(node, startNode, startOffset)
+    if (rangeAtFirstTextNode.parentNode == node) {
+      loopIndex(node, rangeAtFirstTextNode, startOffset)
       return true
     }
 

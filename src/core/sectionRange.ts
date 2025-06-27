@@ -9,10 +9,10 @@ export default (container: Node, positions: { start: number, end: number }[]) =>
 
   selection.removeAllRanges()
   positions.forEach(({ start, end }) => {
-    const [startNode, startIndex, endNode, endIndex] = getNodeAndOffset(container, start, end) as OffsetAndSetRange
+    const [startNode, startOffset, endNode, endOffset] = getNodeAndOffset(container, start, end) as OffsetAndSetRange
     const range = document.createRange()
-    range.setStart(startNode, startIndex)
-    range.setEnd(endNode, endIndex)
+    range.setStart(startNode, startOffset)
+    range.setEnd(endNode, endOffset)
     selection.addRange(range)
   })
 }
@@ -61,7 +61,7 @@ function getNodeAndOffset(dom: Node, start = 0, end = 0): OffsetAndSetRange | nu
     // 可以确定startIndex了
     if (!startNode && start >= range[0] && start < range[1]) {
       startNode = node
-      startIndex = start - total
+      startIndex = start - range[0]
     }
     // '我要' (0, 2)
     if (!endNode && end > range[0] && end <= range[1]) {
