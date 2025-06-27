@@ -12,18 +12,16 @@ interface TriggerPosition {
 
 class Popover {
   protected popoverEle: HTMLElement | null = null
-  protected triggerNode: Node | null = null
 
-  constructor(domId: string, rangeTextNode: Node) {
-    this.triggerNode = rangeTextNode
-    this.init(domId)
+  constructor(popoverId: string) {
+    this.init(popoverId)
     this.initEvent()
   }
 
-  init(domId: string) {
-    const $ele = document.getElementById(domId)
+  init(popoverId: string) {
+    const $ele = document.getElementById(popoverId)
     if (!$ele) {
-      throw new Error('domId is not found')
+      throw new Error('popoverId is not found')
     }
     this.popoverEle = $ele
     this.popoverEle.style.visibility = 'hidden'
@@ -32,7 +30,7 @@ class Popover {
   }
 
   initEvent() {
-    document.addEventListener('mouseup', (evt) => {
+    document.addEventListener('mouseup', () => {
       const triggerPosition = this.getTriggerPosition()
       if (triggerPosition) {
         this.show(triggerPosition)
@@ -91,9 +89,12 @@ class Popover {
   }
 }
 
+/**
+ * @param popoverId 用户需要展示弹窗元素的id
+ */
 export default class DrawWordConstituencyPopover extends Popover {
-  constructor(popoverId: string, rangeTextNode: Node) {
-    super(popoverId, rangeTextNode)
+  constructor(popoverId: string) {
+    super(popoverId)
   }
 
   init() {
