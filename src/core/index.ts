@@ -29,6 +29,15 @@ export function matchKeywordsWithPositions(str: string, keywords: string | strin
   let match: RegExpExecArray | null
 
   // 使用 exec 遍历所有匹配项
+  /**
+   * {
+  0: "apple",          // 完整匹配的文本
+  index: 7,            // 匹配开始的字符索引
+  input: "I like apple", // 原始输入字符串
+  groups: undefined,    // 命名捕获组（本例未使用）
+  length: 1            // 捕获组数量
+}
+   */
   // eslint-disable-next-line no-cond-assign
   while ((match = (regex as RegExp).exec(str)) !== null) {
     matches.push({

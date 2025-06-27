@@ -40,9 +40,9 @@ export function getSelectionRange(container: Node, config?: GetSectionRangeConfi
 
   const selection = document.getSelection() as Selection
   const range = selection.getRangeAt(0)
-  const startNode = range.startContainer
+  const rangeAtFirstTextNode = range.startContainer
   const startOffset = range.startOffset // 开始位置的偏移量
-  loopIndex(container, startNode, startOffset)
+  loopIndex(container, rangeAtFirstTextNode, startOffset)
   const endIndex = startIndex + selection.toString().trim().length
   return [startIndex, endIndex]
 }
