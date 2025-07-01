@@ -1,14 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { auExtractText, sectionRangeHighlight, getSelectionRange, getSelectionRangeContent } from '../../../lib/bundle.esm.js';
+import { auExtractText, DrawWordConstituencyPopover, sectionRangeHighlight, getSelectionRange, getSelectionRangeContent } from '../../../lib/bundle.esm.js';
+
 
 const TextHighlighter = () => {
   const textRef = useRef<HTMLDivElement>(null);
   const [selectedRange, setSelectedRange] = useState<[number, number] | null>(null);
   const [keyword, setKeyword] = useState<string>('参数');
-
-  useEffect(() => {
-    const dom = document.getElementById('text-highlighter')
-  }, [])
 
   const handleHighlight = () => {
     if (textRef.current) {
@@ -31,8 +28,15 @@ const TextHighlighter = () => {
     }
   };
 
+  useEffect(() => {
+    new DrawWordConstituencyPopover('popover_highlighter')
+  }, [])
+
   return (
     <div id="text-highlighter" className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
+      <div id="popover_highlighter" className="w-10 h-10 bg-gray-500">
+        测试popover
+      </div>
       <h2 className="text-2xl font-bold mb-4 text-gray-800">文本高亮演示</h2>
 
       <div className="mb-4">

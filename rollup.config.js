@@ -27,7 +27,8 @@ export default {
     resolve(),
     commonjs(),
     typescript({
-      tslib: 'tslib',
+      // tsconfig: './tsconfig.json',
+      // tslib: 'tslib',
     }),
     terser(), // Optional
   ],

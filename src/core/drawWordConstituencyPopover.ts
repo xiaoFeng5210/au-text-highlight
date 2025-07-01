@@ -31,13 +31,16 @@ class Popover {
 
   initEvent() {
     document.addEventListener('mouseup', () => {
-      const triggerPosition = this.getTriggerPosition()
-      if (triggerPosition) {
-        this.show(triggerPosition)
-      }
-      else {
-        this.hide()
-      }
+      setTimeout(() => {
+        const triggerPosition = this.getTriggerPosition()
+        console.log('%c [ triggerPosition ]-36', 'font-size:13px; background:pink; color:#bf2c9f;', triggerPosition)
+        if (triggerPosition) {
+          this.show(triggerPosition)
+        }
+        else {
+          this.hide()
+        }
+      }, 100)
     })
   }
 
