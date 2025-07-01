@@ -40,9 +40,7 @@ class Popover {
     document.addEventListener('mouseup', () => {
       setTimeout(() => {
         const triggerPosition = this.getTriggerPosition()
-
         if (triggerPosition) {
-          // 如果是两行的情况, 在最右侧
           this.show(triggerPosition)
         }
         else {
