@@ -34,7 +34,7 @@ const TextHighlighter = () => {
 
   return (
     <div id="text-highlighter" className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
-      <div id="popover_highlighter" className="w-10 h-10 bg-gray-500">
+      <div id="popover_highlighter" className="w-30 h-10 bg-gray-500">
         测试popover
       </div>
       <h2 className="text-2xl font-bold mb-4 text-gray-800">文本高亮演示</h2>

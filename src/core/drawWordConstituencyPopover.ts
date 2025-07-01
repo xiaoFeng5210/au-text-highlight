@@ -10,10 +10,16 @@ interface TriggerPosition {
   height: number
 }
 
+interface PopoverConfig {
+  distance?: number
+}
+
 class Popover {
   protected popoverEle: HTMLElement | null = null
+  protected distance = 5
 
-  constructor(popoverId: string) {
+  constructor(popoverId: string, config: PopoverConfig = {}) {
+    this.distance = config.distance || this.distance
     this.init(popoverId)
     this.initEvent()
   }
@@ -50,7 +56,7 @@ class Popover {
     // 计算触发元素的中心点
     const centerX = x + width / 2
     const actualLeft = centerX - this.popoverEle.offsetWidth / 2
-    const actualTop = y - 5
+    const actualTop = y - this.popoverEle.offsetHeight - this.distance
     this.popoverEle.style.left = `${actualLeft}px`
     this.popoverEle.style.top = `${actualTop}px`
     this.popoverEle.style.visibility = 'visible'
