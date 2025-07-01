@@ -19,7 +19,7 @@ class Popover {
   protected distance = 5
 
   constructor(popoverId: string, config: PopoverConfig = {}) {
-    this.distance = config.distance || this.distance
+    this.distance = config?.distance ?? this.distance
     this.init(popoverId)
     this.initEvent()
   }
@@ -31,6 +31,7 @@ class Popover {
     }
     this.popoverEle = $ele
     this.popoverEle.style.visibility = 'hidden'
+    this.popoverEle.style.display = 'none'
     this.popoverEle.style.position = 'fixed'
     document.body.appendChild(this.popoverEle)
   }
@@ -39,7 +40,9 @@ class Popover {
     document.addEventListener('mouseup', () => {
       setTimeout(() => {
         const triggerPosition = this.getTriggerPosition()
+
         if (triggerPosition) {
+          // 如果是两行的情况, 在最右侧
           this.show(triggerPosition)
         }
         else {
@@ -55,16 +58,22 @@ class Popover {
       return
     // 计算触发元素的中心点
     const centerX = x + width / 2
-    const actualLeft = centerX - this.popoverEle.offsetWidth / 2
+    let actualLeft = centerX - this.popoverEle.offsetWidth / 2
     const actualTop = y - this.popoverEle.offsetHeight - this.distance
+    // 如果是两行的情况, 在最右侧
+    if (position.height > 30) {
+      actualLeft = x + width - this.popoverEle.offsetWidth
+    }
     this.popoverEle.style.left = `${actualLeft}px`
     this.popoverEle.style.top = `${actualTop}px`
+    this.popoverEle.style.display = 'block'
     this.popoverEle.style.visibility = 'visible'
   }
 
   hide() {
     if (!this.popoverEle)
       return
+    this.popoverEle.style.display = 'none'
     this.popoverEle.style.visibility = 'hidden'
   }
 
@@ -100,7 +109,7 @@ class Popover {
  * @param popoverId 用户需要展示弹窗元素的id
  */
 export default class DrawWordConstituencyPopover extends Popover {
-  constructor(popoverId: string) {
-    super(popoverId)
+  constructor(popoverId: string, config: PopoverConfig = {}) {
+    super(popoverId, config)
   }
 }
