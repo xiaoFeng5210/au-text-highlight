@@ -33,7 +33,6 @@ class Popover {
     document.addEventListener('mouseup', () => {
       setTimeout(() => {
         const triggerPosition = this.getTriggerPosition()
-        console.log('%c [ triggerPosition ]-36', 'font-size:13px; background:pink; color:#bf2c9f;', triggerPosition)
         if (triggerPosition) {
           this.show(triggerPosition)
         }
@@ -82,7 +81,6 @@ class Popover {
         }
       }
       else {
-        console.error('no selection')
         return null
       }
     }
@@ -98,8 +96,5 @@ class Popover {
 export default class DrawWordConstituencyPopover extends Popover {
   constructor(popoverId: string) {
     super(popoverId)
-  }
-
-  init() {
   }
 }
