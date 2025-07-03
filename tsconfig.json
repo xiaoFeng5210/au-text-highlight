@@ -2,13 +2,21 @@
   "compilerOptions": {
     "composite": true,
     "target": "ES5",
+    "jsx": "react-jsx",
+    "lib": [
+      "ES2015",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
     "moduleResolution": "node",
     "strict": true,
     "declaration": true,
     "declarationDir": "lib",
+    "emitDeclarationOnly": false,
     "importHelpers": true,
     "outDir": "lib",
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true

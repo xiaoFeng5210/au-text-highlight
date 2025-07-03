@@ -1,5 +1,6 @@
 import './App.css'
-import TextHighlighter from './components/TextHighlighter'
+// import TextHighlighter from './components/TextHighlighter'
+import ReactPopoverDemo from './components/ReactPopoverDemo'
 
 function App() {
   return (
@@ -8,7 +9,8 @@ function App() {
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
           文本高亮库演示
         </h1>
-        <TextHighlighter />
+        {/* <TextHighlighter /> */}
+        <ReactPopoverDemo />
       </div>
     </div>
   )
