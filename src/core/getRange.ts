@@ -42,9 +42,47 @@ export function getSelectionRange(container: Node, config?: GetSectionRangeConfi
   const range = selection.getRangeAt(0)
   const rangeAtFirstTextNode = range.startContainer
   const startOffset = range.startOffset // 开始位置的偏移量
-  loopIndex(container, rangeAtFirstTextNode, startOffset)
+  loopTreeIndex(container, rangeAtFirstTextNode, startOffset)
   const endIndex = startIndex + selection.toString().trim().length
   return [startIndex, endIndex]
+}
+
+function loopTreeIndex(dom: Node, rangeAtFirstTextNode: Node, startOffset: number) {
+  const MAX_DEPTH = 1000
+  const textNodeArr: Node[] = []
+  const firstChildNodes = dom.childNodes
+  const loop = (childs: NodeListOf<ChildNode>, depth = 0) => {
+    if (depth > MAX_DEPTH) {
+      throw new Error('DOM tree is too deep')
+    }
+    for (let i = 0; i < childs.length; i++) {
+      const node = childs[i]
+      if (!node.textContent) {
+        continue
+      }
+      if (node.nodeName === '#text') {
+        textNodeArr.push(node)
+      }
+      else {
+        loop(node.childNodes, depth + 1)
+      }
+    }
+  }
+  loop(firstChildNodes)
+
+  if (textNodeArr.length > 0) {
+    textNodeArr.some((node) => {
+      if (node.textContent === rangeAtFirstTextNode.textContent) {
+        startIndex += startOffset
+        return true
+      }
+
+      if (node.textContent) {
+        startIndex += node.textContent.length
+      }
+      return false
+    })
+  }
 }
 
 /**
