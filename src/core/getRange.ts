@@ -91,6 +91,7 @@ function loopTreeIndex(dom: Node, rangeAtFirstTextNode: Node, startOffset: numbe
  * @param startNode
  * @param startOffset
  */
+// eslint-disable-next-line unused-imports/no-unused-vars
 function loopIndex(dom: Node, rangeAtFirstTextNode: Node, startOffset: number) {
   // eslint-disable-next-line ts/ban-ts-comment
   // @ts-expect-error
