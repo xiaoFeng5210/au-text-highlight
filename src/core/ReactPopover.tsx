@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { throttle } from 'lodash'
 import type { TriggerPosition } from '../types'
 import type { ReactPopoverPropsTyped } from '../types/react'
 import { useTextSelection } from './useTextSelection'
-import { getSelectionRange } from './getRange'
 
 /**
  * React 版本的文本选区 Popover 组件
@@ -130,13 +130,13 @@ export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
     if (!isVisible || !selection)
       return
 
-    const handleResize = () => {
+    const handleResize = throttle(() => {
       const selectionInfo = getTriggerPosition()
       if (!selectionInfo)
         return
       const newStyle = calculatePosition(selectionInfo)
       setPopoverStyle(newStyle)
-    }
+    }, 50)
 
     window.addEventListener('resize', handleResize)
     window.addEventListener('scroll', handleResize)
