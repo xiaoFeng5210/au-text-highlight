@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { ReactPopover } from '../../../src/core/ReactPopover'
+import { ReactAuSelectionPopover } from '../../../src/index'
 
 interface TriggerPosition {
   text: string
@@ -51,11 +51,11 @@ const ReactPopoverDemo: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">React Popover 组件演示</h2>
 
       {/* 控制面板 */}
-      <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+      <div className="mb-6 bg-gray-50 rounded-lg">
         <h3 className="text-lg font-semibold mb-3 text-gray-700">配置选项</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
@@ -139,7 +139,7 @@ const ReactPopoverDemo: React.FC = () => {
       )}
 
       {/* React Popover 组件 */}
-      <ReactPopover
+      <ReactAuSelectionPopover
         distance={distance}
         disabled={disabled}
         container={textContainerRef.current || undefined}
@@ -182,7 +182,7 @@ const ReactPopoverDemo: React.FC = () => {
             </div>
           )}
         </div>
-      </ReactPopover>
+      </ReactAuSelectionPopover>
 
       {/* 使用说明 */}
       <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">

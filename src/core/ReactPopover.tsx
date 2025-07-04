@@ -3,12 +3,13 @@ import { createPortal } from 'react-dom'
 import type { TriggerPosition } from '../types'
 import type { ReactPopoverPropsTyped } from '../types/react'
 import { useTextSelection } from './useTextSelection'
+import { getSelectionRange } from './getRange'
 
 /**
  * React 版本的文本选区 Popover 组件
  * 支持插槽式内容自定义，复用现有的位置计算逻辑
  */
-export const ReactPopover: React.FC<ReactPopoverPropsTyped> = ({
+export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
   children,
   distance = 10,
   className = '',
@@ -92,6 +93,8 @@ export const ReactPopover: React.FC<ReactPopoverPropsTyped> = ({
       const newStyle = calculatePosition(selection)
       setPopoverStyle(newStyle)
       setIsVisible(true)
+
+      console.log('%c [  ]-97', 'font-size:13px; background:pink; color:#bf2c9f;', selection)
       onShow?.(selection)
     }
     else {
@@ -171,4 +174,4 @@ export const ReactPopover: React.FC<ReactPopoverPropsTyped> = ({
   return popoverElement
 }
 
-export default ReactPopover
+export default AuSelectionPopover
