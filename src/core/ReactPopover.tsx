@@ -25,7 +25,7 @@ export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
   const [isVisible, setIsVisible] = useState(false)
   const [popoverStyle, setPopoverStyle] = useState<React.CSSProperties>({})
 
-  const { selection, clearSelection } = useTextSelection({
+  const { selection, clearSelection, getTriggerPosition } = useTextSelection({
     delay: 100,
     container,
   })
@@ -93,8 +93,6 @@ export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
       const newStyle = calculatePosition(selection)
       setPopoverStyle(newStyle)
       setIsVisible(true)
-
-      console.log('%c [  ]-97', 'font-size:13px; background:pink; color:#bf2c9f;', selection)
       onShow?.(selection)
     }
     else {
@@ -133,7 +131,10 @@ export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
       return
 
     const handleResize = () => {
-      const newStyle = calculatePosition(selection)
+      const selectionInfo = getTriggerPosition()
+      if (!selectionInfo)
+        return
+      const newStyle = calculatePosition(selectionInfo)
       setPopoverStyle(newStyle)
     }
 

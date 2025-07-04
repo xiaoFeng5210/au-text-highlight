@@ -46,8 +46,8 @@ export function useTextSelection(options: UseTextSelectionOptionsTyped = {}): Us
 
       return {
         text: result,
-        x: rect.left + window.scrollX,
-        y: rect.top + window.scrollY,
+        x: rect.left,
+        y: rect.top,
         width: rect.width,
         height: rect.height,
       }
@@ -108,5 +108,6 @@ export function useTextSelection(options: UseTextSelectionOptionsTyped = {}): Us
     selection,
     isSelecting,
     clearSelection,
+    getTriggerPosition,
   }
 }

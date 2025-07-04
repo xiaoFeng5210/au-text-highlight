@@ -130,6 +130,7 @@ interface UseTextSelectionReturnTyped {
   selection: TriggerPosition$1 | null
   isSelecting: boolean
   clearSelection: () => void
+  getTriggerPosition: () => TriggerPosition$1 | null
 }
 
 /**

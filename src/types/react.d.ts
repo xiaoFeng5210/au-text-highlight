@@ -25,4 +25,5 @@ export interface UseTextSelectionReturnTyped {
   selection: TriggerPosition | null
   isSelecting: boolean
   clearSelection: () => void
+  getTriggerPosition: () => TriggerPosition | null
 }
