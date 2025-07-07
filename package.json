@@ -10,7 +10,6 @@
     "url": "https://github.com/xiaoFeng5210/au-text-highlight/issues"
   },
   "keywords": [
-    "关键字高亮",
     "划词",
     "React组件",
     "划词评论",
@@ -18,7 +17,8 @@
     "高亮",
     "文本匹配",
     "文本高亮",
-    "关键字匹配"
+    "关键字匹配",
+    "关键字高亮"
   ],
   "main": "lib/bundle.cjs.js",
   "module": "lib/bundle.esm.js",
