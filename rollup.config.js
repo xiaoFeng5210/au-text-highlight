@@ -14,7 +14,6 @@ export default [
       {
         file: 'lib/bundle.cjs.js',
         format: 'cjs', // CommonJS
-        sourcemap: true,
         globals: {
           'react': 'React',
           'react-dom': 'ReactDOM',
@@ -23,13 +22,11 @@ export default [
       {
         file: 'lib/bundle.esm.js',
         format: 'esm', // ES Module
-        sourcemap: true,
       },
       {
         file: 'lib/bundle.umd.js',
         format: 'umd', // UMD
         name: 'AuTextHighlight',
-        sourcemap: true,
         globals: {
           'react': 'React',
           'react-dom': 'ReactDOM',
