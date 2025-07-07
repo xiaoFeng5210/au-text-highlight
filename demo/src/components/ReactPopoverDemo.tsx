@@ -53,7 +53,7 @@ const ReactPopoverDemo: React.FC = () => {
 
   const highlightWords = () => {
     if (textContainerRef.current) {
-      sectionRangeHighlight(textContainerRef.current, [{ start: 0, end: 1 }])
+      sectionRangeHighlight(textContainerRef.current, [{ start: 23, end: 27 }])
     }
   }
 

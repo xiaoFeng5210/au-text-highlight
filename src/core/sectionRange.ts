@@ -13,7 +13,7 @@ export default (container: Node, positions: { start: number, end: number, gid?: 
     const range = document.createRange()
     range.setStart(startNode, startOffset)
     range.setEnd(endNode, endOffset)
-    selection.addRange(range)
+    // selection.addRange(range)
     const eleWrap = document.createElement('span')
     eleWrap.setAttribute('role', 'text')
     eleWrap.setAttribute('aria-label', '高亮内容')
