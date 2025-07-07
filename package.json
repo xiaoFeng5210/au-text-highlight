@@ -25,6 +25,7 @@
   "types": "lib/index.d.ts",
   "files": [
     "LICENSE",
+    "README-EN.md",
     "README.md",
     "lib"
   ],

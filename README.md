@@ -1,13 +1,17 @@
 # au-text-highlight
-文本高亮和关键字匹配模块，支持原生JavaScript和React组件，提供文本选区检测、关键字高亮、划词弹窗等功能。
+
+**中文 | [English](README-EN.md)**
+
+正式版已发布v1.1.0
+3行代码实现划词相关功能、关键字高亮、选区检测等功能。附带React版本划词popover组件！
 
 ## 项目背景
 在现代Web应用中，文本高亮、划词翻译、关键字搜索等功能越来越常见。本模块提供了一套完整的解决方案，包括：
-- 🎯 **文本选区检测** - 精确获取用户选中的文本位置
+- 🎯 **文本选区检测** - 精确获取用户划词选中的文本位置
 - 🌈 **智能高亮** - 自动高亮指定文本区域，支持自定义样式
-- 📝 **关键字匹配** - 高效匹配文本中的关键词位置
-- 💬 **划词弹窗** - 原生JavaScript和React两种实现方式
+- 💬 **划词弹窗** - 选区后出现React popover组件
 - 🔧 **高度可定制** - 支持样式、行为、交互的完全自定义
+- 📝 **关键字匹配** - 高效匹配文本中的关键词位置
 
 ## 安装
 ```bash
@@ -338,38 +342,10 @@ function TextHighlightDemo() {
 }
 ```
 
-## 类型定义
-
-```typescript
-// 基础配置
-interface DeafultConfig {
-  text: string
-  keywords: string | string[]
-}
-
-// 位置信息
-interface TriggerPosition {
-  text: string
-  x: number
-  y: number
-  width: number
-  height: number
-}
-
-// 高亮位置
-interface HighlightPosition {
-  start: number
-  end: number
-  gid?: string
-}
-
-// 匹配结果
-interface MatchResult {
-  keyword: string
-  start: number
-  end: number
-}
-```
+## 版本更新日志
+- v1.1.0
+  - 正式版发布，完善文档，提供全面的划词评论，划词等功能的解决方案
+  - 增加react popover组件，用户划词选区后会出现popover组件
 
 ## 高级功能
 未完待续，后续持续更新ing
@@ -400,7 +376,7 @@ function removeAllHighlights() {
   })
 }
 ``` -->
-
+<!--
 ### 自定义弹窗样式
 ```css
 .au-text-highlight-popover {
@@ -424,7 +400,7 @@ function removeAllHighlights() {
     transform: translateY(0);
   }
 }
-```
+``` -->
 
 ## 浏览器兼容性
 - Chrome 60+
@@ -434,6 +410,3 @@ function removeAllHighlights() {
 
 ## 贡献
 欢迎提交Issue和Pull Request！如果你有好的想法或发现了bug，请随时参与贡献。
-
-## 许可证
-MIT License
