@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react'
-import { ReactAuSelectionPopover } from '../../../src/index'
+import { ReactAuSelectionPopover, sectionRangeHighlight } from '../../../src/index'
+import '../assets/style.css'
 
 interface TriggerPosition {
   text: string
@@ -50,10 +51,15 @@ const ReactPopoverDemo: React.FC = () => {
     }
   }
 
+  const highlightWords = () => {
+    if (textContainerRef.current) {
+      sectionRangeHighlight(textContainerRef.current, [{ start: 0, end: 1 }])
+    }
+  }
+
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">React Popover 组件演示</h2>
-
       {/* 控制面板 */}
       <div className="mb-6 bg-gray-50 rounded-lg">
         <h3 className="text-lg font-semibold mb-3 text-gray-700">配置选项</h3>
@@ -83,6 +89,10 @@ const ReactPopoverDemo: React.FC = () => {
               禁用 Popover
             </label>
           </div>
+          {/* 高亮关键字 */}
+          <div className="flex items-center">
+            <button onClick={highlightWords}>高亮关键词</button>
+          </div>
           <div className="flex items-center">
             <div className={`px-3 py-1 rounded-full text-sm ${isPopoverVisible
               ? 'bg-green-100 text-green-800'
@@ -99,7 +109,7 @@ const ReactPopoverDemo: React.FC = () => {
         <h3 className="text-lg font-semibold mb-2 text-gray-700">选择文本试试：</h3>
         <div
           ref={textContainerRef}
-          className="p-6 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 leading-relaxed text-gray-800"
+          className="p-6 border-2 border-gray-300 rounded-lg bg-gray-50 leading-relaxed text-gray-800 border-dashed"
           style={{ userSelect: 'text' }}
         >
           <p className="mb-4">

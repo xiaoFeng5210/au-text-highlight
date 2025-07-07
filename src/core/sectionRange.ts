@@ -1,6 +1,6 @@
 import type { OffsetAndSetRange } from '../types'
 
-export default (container: Node, positions: { start: number, end: number }[]) => {
+export default (container: Node, positions: { start: number, end: number, gid?: string }[]) => {
   // Selection 对象表示用户选择的文本范围或插入符号的当前位置。它代表页面中的文本选区，可能横跨多个元素。通常由用户拖拽鼠标经过文字而产生
   const selection = document?.getSelection()
   if (!selection) {
@@ -8,12 +8,26 @@ export default (container: Node, positions: { start: number, end: number }[]) =>
   }
 
   selection.removeAllRanges()
-  positions.forEach(({ start, end }) => {
+  positions.forEach(({ start, end, gid = '' }) => {
     const [startNode, startOffset, endNode, endOffset] = getNodeAndOffset(container, start, end) as OffsetAndSetRange
     const range = document.createRange()
     range.setStart(startNode, startOffset)
     range.setEnd(endNode, endOffset)
     selection.addRange(range)
+    const eleWrap = document.createElement('span')
+    eleWrap.setAttribute('role', 'text')
+    eleWrap.setAttribute('aria-label', '高亮内容')
+    eleWrap.className = 'word_comment_mark'
+
+    if (gid) {
+      eleWrap.setAttribute('id', gid)
+    }
+    try {
+      range.surroundContents(eleWrap)
+    }
+    catch {
+      console.error('存在不可高亮的元素，多半由于选区交叉导致')
+    }
   })
 }
 

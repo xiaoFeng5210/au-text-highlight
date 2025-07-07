@@ -70,8 +70,8 @@ export default [
     plugins: [
       dts({
         tsconfig: './tsconfig.json',
-        exclude: ['**/*.test.*', 'demo/**/*']
+        exclude: ['**/*.test.*', 'demo/**/*'],
       }),
     ],
-  }
+  },
 ]

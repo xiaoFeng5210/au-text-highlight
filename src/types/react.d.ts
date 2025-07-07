@@ -14,6 +14,7 @@ export interface ReactPopoverPropsTyped {
   disabled?: boolean
   portal?: boolean
   zIndex?: number
+  closeFragment?: HTMLElement
 }
 
 export interface UseTextSelectionOptionsTyped {

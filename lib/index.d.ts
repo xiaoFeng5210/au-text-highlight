@@ -4,6 +4,7 @@ import React$1 from 'react';
 declare const _default: (container: Node, positions: {
     start: number;
     end: number;
+    gid?: string;
 }[]) => void;
 
 interface DeafultConfig {
@@ -119,6 +120,7 @@ interface ReactPopoverPropsTyped {
   disabled?: boolean
   portal?: boolean
   zIndex?: number
+  closeFragment?: HTMLElement
 }
 
 interface UseTextSelectionOptionsTyped {
