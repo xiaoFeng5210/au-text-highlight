@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { ReactAuSelectionPopover, sectionRangeHighlight, getSelectionRange, type PopoverComponentRef } from '../../../src/index'
+import { ReactAuSelectionPopover, sectionRangeHighlight, getSelectionRange, type PopoverComponentRef } from 'au-text-highlight'
 import '../assets/style.css'
 
 interface TriggerPosition {
@@ -153,7 +153,6 @@ const ReactPopoverDemo: React.FC = () => {
 
       {/* React Popover 组件 */}
       <ReactAuSelectionPopover
-        ref={popoverRef}
         distance={distance}
         disabled={disabled}
         container={textContainerRef.current || undefined}

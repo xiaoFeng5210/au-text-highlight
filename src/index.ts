@@ -12,7 +12,7 @@ export {
 }
 
 // React 组件导出 - 使用延迟导入
-export { AuSelectionPopover as ReactAuSelectionPopover } from './core/ReactPopover'
+export { default as ReactAuSelectionPopover } from './core/ReactPopover'
 export { useTextSelection } from './core/useTextSelection'
 
 // 导出类型定义

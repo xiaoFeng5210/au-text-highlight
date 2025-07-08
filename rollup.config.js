@@ -2,14 +2,19 @@ import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import babel from '@rollup/plugin-babel'
-import { terser } from 'rollup-plugin-terser'
 import dts from 'rollup-plugin-dts'
 
 export default [
   // 主构建配置
   {
     input: 'src/index.ts',
-    external: ['react', 'react-dom'], // 将 React 标记为外部依赖
+    external: (id) => {
+      if (id === 'react' || id === 'react-dom')
+        return true
+      if (id.startsWith('react/') || id.startsWith('react-dom/'))
+        return true
+      return false
+    },
     output: [
       {
         file: 'lib/bundle.cjs.js',
@@ -22,6 +27,10 @@ export default [
       {
         file: 'lib/bundle.esm.js',
         format: 'esm', // ES Module
+        globals: {
+          'react': 'React',
+          'react-dom': 'ReactDOM',
+        },
       },
       {
         file: 'lib/bundle.umd.js',
@@ -42,7 +51,8 @@ export default [
       typescript({
         tsconfig: './tsconfig.json',
         exclude: ['**/*.test.*', 'demo/**/*'],
-        declaration: false, // 在主构建中不生成声明文件
+        declaration: true,
+        declarationDir: 'lib/types', // 将声明文件放到单独目录
       }),
       babel({
         babelHelpers: 'bundled',
@@ -53,13 +63,22 @@ export default [
           '@babel/preset-typescript',
         ],
       }),
-      terser(),
     ],
   },
   // 类型声明文件生成配置
   {
     input: 'src/index.ts',
-    external: ['react', 'react-dom'],
+    external: (id) => {
+      if (id === 'react' || id === 'react-dom')
+        return true
+      if (id.startsWith('react/') || id.startsWith('react-dom/'))
+        return true
+      if (id === 'tslib' || id.includes('tslib'))
+        return true
+      if (id.includes('node_modules'))
+        return true
+      return false
+    },
     output: {
       file: 'lib/index.d.ts',
       format: 'esm',

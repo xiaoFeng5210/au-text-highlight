@@ -1,8 +1,7 @@
-import type { ForwardRefRenderFunction } from 'react'
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
-import { throttle } from 'lodash'
-import type { ChildComponentRef as PopoverComponentRef, TriggerPosition } from '../types'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
+// import { createPortal } from 'react-dom'
+import { throttle } from '../utils/common'
+import type { TriggerPosition } from '../types'
 import type { ReactPopoverPropsTyped } from '../types/react'
 import { useTextSelection } from './useTextSelection'
 
@@ -10,7 +9,7 @@ import { useTextSelection } from './useTextSelection'
  * React 版本的文本选区 Popover 组件
  * 支持插槽式内容自定义，复用现有的位置计算逻辑
  */
-export const AuSelectionPopover = forwardRef<PopoverComponentRef, ReactPopoverPropsTyped>(({
+const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
   children,
   distance = 10,
   className = '',
@@ -19,9 +18,8 @@ export const AuSelectionPopover = forwardRef<PopoverComponentRef, ReactPopoverPr
   onShow,
   onHide,
   disabled = false,
-  portal = true,
   zIndex = 9999,
-}, ref) => {
+}) => {
   const popoverRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [popoverStyle, setPopoverStyle] = useState<React.CSSProperties>({})
@@ -148,28 +146,23 @@ export const AuSelectionPopover = forwardRef<PopoverComponentRef, ReactPopoverPr
     }
   }, [isVisible, selection, calculatePosition])
 
-  const open = () => {
-    setIsVisible(true)
-    setPopoverStyle(prev => ({
-      ...prev,
-      opacity: 1,
-      visibility: 'visible' as const,
-    }))
-  }
+  // const open = () => {
+  //   setIsVisible(true)
+  //   setPopoverStyle(prev => ({
+  //     ...prev,
+  //     opacity: 1,
+  //     visibility: 'visible' as const,
+  //   }))
+  // }
 
-  const close = () => {
-    setIsVisible(false)
-    setPopoverStyle(prev => ({
-      ...prev,
-      opacity: 0,
-      visibility: 'hidden' as const,
-    }))
-  }
-
-  useImperativeHandle(ref, () => ({
-    open,
-    close,
-  }), [])
+  // const close = () => {
+  //   setIsVisible(false)
+  //   setPopoverStyle(prev => ({
+  //     ...prev,
+  //     opacity: 0,
+  //     visibility: 'hidden' as const,
+  //   }))
+  // }
 
   const popoverElement = (
     <div
@@ -191,12 +184,7 @@ export const AuSelectionPopover = forwardRef<PopoverComponentRef, ReactPopoverPr
     </div>
   )
 
-  // 根据 portal 配置决定渲染方式
-  if (portal) {
-    return createPortal(popoverElement, document.body)
-  }
-
   return popoverElement
-})
+}
 
 export default AuSelectionPopover

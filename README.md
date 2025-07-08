@@ -344,9 +344,7 @@ function TextHighlightDemo() {
 ```
 
 ## 版本更新日志
-- v1.1.2
-  - 可以直接控制popver组件展示隐藏，调用popover组件的open和close方法
-- v1.1.1
+- v1.1.5
   - 修复react popover组件
 - v1.1.0
   - 正式版发布，完善文档，提供全面的划词评论，划词等功能的解决方案

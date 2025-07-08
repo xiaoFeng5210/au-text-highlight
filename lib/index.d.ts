@@ -114,7 +114,6 @@ declare class DrawWordConstituencyPopover extends Popover {
 
 // 当 React 可用时的准确类型定义
 interface ReactPopoverPropsTyped {
-  open?: boolean
   children: React.ReactNode
   distance?: number
   className?: string
@@ -125,7 +124,6 @@ interface ReactPopoverPropsTyped {
   disabled?: boolean
   portal?: boolean
   zIndex?: number
-  closeFragment?: HTMLElement
 }
 
 interface UseTextSelectionOptionsTyped {
@@ -145,7 +143,7 @@ interface UseTextSelectionReturnTyped {
  * React 版本的文本选区 Popover 组件
  * 支持插槽式内容自定义，复用现有的位置计算逻辑
  */
-declare const AuSelectionPopover: React$1.ForwardRefExoticComponent<ReactPopoverPropsTyped & React$1.RefAttributes<ChildComponentRef>>;
+declare const AuSelectionPopover: React$1.FC<ReactPopoverPropsTyped>;
 
 /**
  * 文本选区检测 Hook
