@@ -1,7 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import type { ForwardRefRenderFunction } from 'react'
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { throttle } from 'lodash'
-import type { TriggerPosition } from '../types'
+import type { ChildComponentRef as PopoverComponentRef, TriggerPosition } from '../types'
 import type { ReactPopoverPropsTyped } from '../types/react'
 import { useTextSelection } from './useTextSelection'
 
@@ -9,7 +10,7 @@ import { useTextSelection } from './useTextSelection'
  * React 版本的文本选区 Popover 组件
  * 支持插槽式内容自定义，复用现有的位置计算逻辑
  */
-export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
+export const AuSelectionPopover = forwardRef<PopoverComponentRef, ReactPopoverPropsTyped>(({
   children,
   distance = 10,
   className = '',
@@ -20,15 +21,10 @@ export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
   disabled = false,
   portal = true,
   zIndex = 9999,
-}) => {
+}, ref) => {
   const popoverRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const [popoverStyle, setPopoverStyle] = useState<React.CSSProperties>({})
-
-  const { selection, clearSelection, getTriggerPosition } = useTextSelection({
-    delay: 100,
-    container,
-  })
 
   // 计算 Popover 位置
   const calculatePosition = useCallback((position: TriggerPosition) => {
@@ -82,18 +78,17 @@ export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
     }
   }, [distance, zIndex])
 
-  // 处理选区变化
-  useEffect(() => {
+  const selectionChange = useCallback((selectionObj: TriggerPosition | null) => {
     if (disabled) {
       setIsVisible(false)
       return
     }
 
-    if (selection) {
-      const newStyle = calculatePosition(selection)
+    if (selectionObj) {
+      const newStyle = calculatePosition(selectionObj)
       setPopoverStyle(newStyle)
       setIsVisible(true)
-      onShow?.(selection)
+      onShow?.(selectionObj)
     }
     else {
       setIsVisible(false)
@@ -105,7 +100,13 @@ export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
       }))
       onHide?.()
     }
-  }, [selection, disabled, calculatePosition, onShow, onHide])
+  }, [disabled, calculatePosition, onShow, onHide])
+
+  const { selection, clearSelection, getTriggerPosition } = useTextSelection({
+    delay: 100,
+    container,
+    selectionChange,
+  })
 
   // 点击外部区域隐藏
   useEffect(() => {
@@ -147,6 +148,29 @@ export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
     }
   }, [isVisible, selection, calculatePosition])
 
+  const open = () => {
+    setIsVisible(true)
+    setPopoverStyle(prev => ({
+      ...prev,
+      opacity: 1,
+      visibility: 'visible' as const,
+    }))
+  }
+
+  const close = () => {
+    setIsVisible(false)
+    setPopoverStyle(prev => ({
+      ...prev,
+      opacity: 0,
+      visibility: 'hidden' as const,
+    }))
+  }
+
+  useImperativeHandle(ref, () => ({
+    open,
+    close,
+  }), [])
+
   const popoverElement = (
     <div
       ref={popoverRef}
@@ -173,6 +197,6 @@ export const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
   }
 
   return popoverElement
-}
+})
 
 export default AuSelectionPopover

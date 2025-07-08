@@ -47,6 +47,10 @@ interface ReactPopoverProps {
     portal?: boolean;
     zIndex?: number;
 }
+interface ChildComponentRef {
+    open: () => void;
+    close: () => void;
+}
 
 /**
  * 获取选区内容
@@ -110,6 +114,7 @@ declare class DrawWordConstituencyPopover extends Popover {
 
 // 当 React 可用时的准确类型定义
 interface ReactPopoverPropsTyped {
+  open?: boolean
   children: React.ReactNode
   distance?: number
   className?: string
@@ -126,6 +131,7 @@ interface ReactPopoverPropsTyped {
 interface UseTextSelectionOptionsTyped {
   delay?: number
   container?: HTMLElement
+  selectionChange?: (position: TriggerPosition$1 | null) => void
 }
 
 interface UseTextSelectionReturnTyped {
@@ -139,7 +145,7 @@ interface UseTextSelectionReturnTyped {
  * React 版本的文本选区 Popover 组件
  * 支持插槽式内容自定义，复用现有的位置计算逻辑
  */
-declare const AuSelectionPopover: React$1.FC<ReactPopoverPropsTyped>;
+declare const AuSelectionPopover: React$1.ForwardRefExoticComponent<ReactPopoverPropsTyped & React$1.RefAttributes<ChildComponentRef>>;
 
 /**
  * 文本选区检测 Hook
@@ -148,4 +154,4 @@ declare const AuSelectionPopover: React$1.FC<ReactPopoverPropsTyped>;
 declare function useTextSelection(options?: UseTextSelectionOptionsTyped): UseTextSelectionReturnTyped;
 
 export { DrawWordConstituencyPopover, AuSelectionPopover as ReactAuSelectionPopover, auExtractHighlightText as auExtractText, getSelectionRange, getSelectionRangeContent, _default as sectionRangeHighlight, useTextSelection };
-export type { DeafultConfig, GetSectionRangeConfig, OffsetAndSetRange, ReactPopoverProps, TriggerPosition$1 as TriggerPosition, UseTextSelectionOptions, UseTextSelectionReturn };
+export type { DeafultConfig, GetSectionRangeConfig, OffsetAndSetRange, ChildComponentRef as PopoverComponentRef, ReactPopoverProps, TriggerPosition$1 as TriggerPosition, UseTextSelectionOptions, UseTextSelectionReturn };

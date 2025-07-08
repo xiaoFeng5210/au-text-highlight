@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { ReactAuSelectionPopover, sectionRangeHighlight } from '../../../src/index'
+import { ReactAuSelectionPopover, sectionRangeHighlight, getSelectionRange, type PopoverComponentRef } from '../../../src/index'
 import '../assets/style.css'
 
 interface TriggerPosition {
@@ -15,17 +15,20 @@ const ReactPopoverDemo: React.FC = () => {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false)
   const [distance, setDistance] = useState(5)
   const [disabled, setDisabled] = useState(false)
+  const [rangeArr, setRangeArr] = useState<{ start: number, end: number }[]>([])
   const textContainerRef = useRef<HTMLDivElement>(null)
-
+  const popoverRef = useRef<PopoverComponentRef>(null)
   const handleShow = (position: TriggerPosition) => {
     setSelectedText(position.text)
     setIsPopoverVisible(true)
-    console.log('Popover 显示:', position)
+    if (textContainerRef.current) {
+      const area = getSelectionRange(textContainerRef.current)
+      setRangeArr([{ start: area[0], end: area[1] }])
+    }
   }
 
   const handleHide = () => {
     setIsPopoverVisible(false)
-    console.log('Popover 隐藏')
   }
 
   const handleTranslate = () => {
@@ -53,7 +56,7 @@ const ReactPopoverDemo: React.FC = () => {
 
   const highlightWords = () => {
     if (textContainerRef.current) {
-      sectionRangeHighlight(textContainerRef.current, [{ start: 23, end: 27 }])
+      sectionRangeHighlight(textContainerRef.current, [{ start: 71, end: 75 }])
     }
   }
 
@@ -150,6 +153,7 @@ const ReactPopoverDemo: React.FC = () => {
 
       {/* React Popover 组件 */}
       <ReactAuSelectionPopover
+        ref={popoverRef}
         distance={distance}
         disabled={disabled}
         container={textContainerRef.current || undefined}
@@ -186,11 +190,15 @@ const ReactPopoverDemo: React.FC = () => {
           >
             📋 复制
           </button>
-          {selectedText && (
-            <div className="mt-2 p-2 bg-gray-100 rounded text-xs text-gray-600">
-              选中: {selectedText.length > 20 ? `${selectedText.slice(0, 20)}...` : selectedText}
-            </div>
-          )}
+          <div className="mt-2 p-2 bg-gray-100 rounded text-xs text-gray-600">
+            选中: {selectedText.length > 20 ? `${selectedText.slice(0, 20)}...` : selectedText}
+          </div>
+          <div className="mt-2 p-2 bg-gray-100 rounded text-xs text-gray-600">
+            区间：{rangeArr[0]?.start} ~ {rangeArr[0]?.end}
+          </div>
+          <div className="flex items-center">
+            <button onClick={() => popoverRef.current?.close()}>关闭</button>
+          </div>
         </div>
       </ReactAuSelectionPopover>
 

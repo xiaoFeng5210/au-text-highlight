@@ -45,3 +45,8 @@ export interface ReactPopoverProps {
   portal?: boolean // 是否使用 Portal 渲染，默认 true
   zIndex?: number // z-index 值，默认 9999
 }
+
+export interface ChildComponentRef {
+  open: () => void
+  close: () => void
+}

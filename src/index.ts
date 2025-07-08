@@ -24,4 +24,5 @@ export type {
   UseTextSelectionOptions,
   UseTextSelectionReturn,
   ReactPopoverProps,
+  ChildComponentRef as PopoverComponentRef,
 } from './types'

@@ -7,7 +7,7 @@ import type { UseTextSelectionOptionsTyped, UseTextSelectionReturnTyped } from '
  * 复用现有的选区检测逻辑，提供 React 友好的接口
  */
 export function useTextSelection(options: UseTextSelectionOptionsTyped = {}): UseTextSelectionReturnTyped {
-  const { delay = 100, container } = options
+  const { delay = 100, container, selectionChange } = options
   const [selection, setSelection] = useState<TriggerPosition | null>(null)
   const [isSelecting, setIsSelecting] = useState(false)
 
@@ -61,34 +61,39 @@ export function useTextSelection(options: UseTextSelectionOptionsTyped = {}): Us
   const clearSelection = useCallback(() => {
     setSelection(null)
     setIsSelecting(false)
-  }, [])
+    selectionChange?.(null)
+  }, [selectionChange])
 
   const handleMouseDown = useCallback(() => {
     setIsSelecting(true)
     setSelection(null)
-  }, [])
+    selectionChange?.(null)
+  }, [selectionChange])
 
   const handleMouseUp = useCallback(() => {
     setTimeout(() => {
       const triggerPosition = getTriggerPosition()
       if (triggerPosition) {
         setSelection(triggerPosition)
+        selectionChange?.(triggerPosition)
       }
       else {
         setSelection(null)
+        selectionChange?.(null)
       }
       setIsSelecting(false)
     }, delay)
-  }, [getTriggerPosition, delay])
+  }, [getTriggerPosition, delay, selectionChange])
 
   const handleSelectionChange = useCallback(() => {
     if (!isSelecting) {
       const triggerPosition = getTriggerPosition()
       if (!triggerPosition) {
         setSelection(null)
+        selectionChange?.(null)
       }
     }
-  }, [getTriggerPosition, isSelecting])
+  }, [getTriggerPosition, isSelecting, selectionChange])
 
   useEffect(() => {
     const targetElement = container || document
