@@ -2,7 +2,7 @@
 
 **[中文](README.md) | English**
 
-Official version v1.1.0 released
+Official version v1.1.51 released
 Implement text selection, keyword highlighting, and selection detection in 3 lines of code. Includes React popover components for text selection!
 
 ## Project Overview

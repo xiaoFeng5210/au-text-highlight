@@ -1,7 +1,7 @@
 {
   "name": "au-text-highlight",
   "type": "module",
-  "version": "1.1.5",
+  "version": "1.1.51",
   "description": "3行代码实现划词相关功能、关键字高亮、选区检测等功能。附带React版本划词popover组件。专为解决划词翻译，划词评论，web文本高亮等这类需求！目前再探索完善。",
   "author": "",
   "license": "ISC",
@@ -50,7 +50,6 @@
       "optional": true
     }
   },
-  "dependencies": {},
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.1",
     "@babel/core": "^7.28.0",
@@ -59,6 +58,7 @@
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",

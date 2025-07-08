@@ -3,6 +3,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import babel from '@rollup/plugin-babel'
 import dts from 'rollup-plugin-dts'
+import terser from '@rollup/plugin-terser'
 
 export default [
   // 主构建配置
@@ -63,6 +64,7 @@ export default [
           '@babel/preset-typescript',
         ],
       }),
+      terser(),
     ],
   },
   // 类型声明文件生成配置
