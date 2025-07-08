@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-// import { createPortal } from 'react-dom'
+import { createPortal } from 'react-dom'
 import { throttle } from '../utils/common'
 import type { TriggerPosition } from '../types'
 import type { ReactPopoverPropsTyped } from '../types/react'
@@ -19,6 +19,7 @@ const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
   onHide,
   disabled = false,
   zIndex = 9999,
+  portal = true,
 }) => {
   const popoverRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
@@ -183,6 +184,10 @@ const AuSelectionPopover: React.FC<ReactPopoverPropsTyped> = ({
       {children}
     </div>
   )
+
+  if (portal) {
+    return createPortal(popoverElement, document.body)
+  }
 
   return popoverElement
 }

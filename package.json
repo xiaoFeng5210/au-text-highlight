@@ -1,7 +1,7 @@
 {
   "name": "au-text-highlight",
   "type": "module",
-  "version": "1.1.51",
+  "version": "1.1.6",
   "description": "3行代码实现划词相关功能、关键字高亮、选区检测等功能。附带React版本划词popover组件。专为解决划词翻译，划词评论，web文本高亮等这类需求！目前再探索完善。",
   "author": "",
   "license": "ISC",

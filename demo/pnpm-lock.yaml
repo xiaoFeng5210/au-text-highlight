@@ -9,8 +9,8 @@ dependencies:
     specifier: ^4.0.9
     version: 4.0.9(vite@6.2.0)
   au-text-highlight:
-    specifier: ^1.1.5
-    version: 1.1.5(classnames@2.5.1)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)
+    specifier: ^1.1.6
+    version: 1.1.6(classnames@2.5.1)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1)
   react:
     specifier: ^18.3.1
     version: 18.3.1
@@ -1122,8 +1122,8 @@ packages:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
     dev: true
 
-  /au-text-highlight@1.1.5(classnames@2.5.1)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-7dJnXpACxeRdpqnHjqNqSxOh4G/ZFoYH/eM1lV/8UBMv6Ttssedc+oM1SkoCYB5isU3QxkTp1M0UNomFfsE+0w==}
+  /au-text-highlight@1.1.6(classnames@2.5.1)(react-dom@18.3.1)(react-is@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-XPJ/9q+dC5tZ6/mD5S9kzcfore8Bgh6G9aqbYPwEUy0ykT4esLL+e1w0Su8C8nTgvZ/qWplZuHyxV3yXhPGVfg==}
     peerDependencies:
       classnames: ^2.3.1
       react: '>=16.8.0'

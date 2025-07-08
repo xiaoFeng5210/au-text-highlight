@@ -49,7 +49,9 @@ const result2 = auExtractText({
 ```
 
 ### 2. 文本选区检测
-获取用户选中文本的位置信息，用于后续的高亮或其他操作。
+获取用户选中文本的位置信息，用于后续的高亮或其他操作(这里，我们是获取一个复杂dom树中用户划词选区的准确的开始结束位置，这个位置信息一般存到后端，方便后续高亮相应部分使用)
+
+> containerElement是开发者传进来的dom区域（一般划词选区等操作都会在这个dom元素内）
 
 ```javascript
 import { getSelectionRange, getSelectionRangeContent } from 'au-text-highlight'
@@ -64,7 +66,9 @@ console.log('选中的文本:', content)
 ```
 
 ### 3. 文本高亮
-根据位置信息自动高亮文本，支持自定义样式和唯一标识。
+根据位置信息(startIndex, endIndex)自动高亮文本，支持自定义样式和唯一标识。
+
+> containerElement是开发者传进来的dom区域（一般划词选区等操作都会在这个dom元素内）
 
 ```javascript
 import { sectionRangeHighlight } from 'au-text-highlight'
@@ -86,7 +90,7 @@ sectionRangeHighlight(containerElement, [
 
 **高亮样式说明：**
 - 高亮元素使用 `<span>` 标签包裹
-- 默认class名称：`word_comment_mark`
+- 默认class名称：`word_comment_mark` 在自己项目中定义好word_comment_mark固定样式即可显示您需要的“高亮”效果
 - 包含无障碍属性：`role="text"` 和 `aria-label="高亮内容"`
 - 支持通过gid参数设置唯一id，便于后续删除或修改
 

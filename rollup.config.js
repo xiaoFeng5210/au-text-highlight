@@ -5,6 +5,13 @@ import babel from '@rollup/plugin-babel'
 import dts from 'rollup-plugin-dts'
 import terser from '@rollup/plugin-terser'
 
+const reactGlobals = {
+  'react': 'React',
+  'react-dom': 'ReactDOM',
+  'react/jsx-runtime': 'jsxRuntime', // 添加 react/jsx-runtime 的全局变量名
+  'tslib': 'tslib', // 添加 tslib 的全局变量名
+}
+
 export default [
   // 主构建配置
   {
@@ -20,27 +27,17 @@ export default [
       {
         file: 'lib/bundle.cjs.js',
         format: 'cjs', // CommonJS
-        globals: {
-          'react': 'React',
-          'react-dom': 'ReactDOM',
-        },
+        globals: reactGlobals,
       },
       {
         file: 'lib/bundle.esm.js',
         format: 'esm', // ES Module
-        globals: {
-          'react': 'React',
-          'react-dom': 'ReactDOM',
-        },
       },
       {
         file: 'lib/bundle.umd.js',
         format: 'umd', // UMD
         name: 'AuTextHighlight',
-        globals: {
-          'react': 'React',
-          'react-dom': 'ReactDOM',
-        },
+        globals: reactGlobals,
       },
     ],
     plugins: [
